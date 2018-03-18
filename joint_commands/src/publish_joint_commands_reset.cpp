@@ -8,32 +8,23 @@
 #include <osrf_msgs/JointCommands.h>
 
 ros::Publisher pub_joint_commands_;
+ros::Publisher pub_joint_commands_reset;
 osrf_msgs::JointCommands jointcommands;
 
-void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
-    static ros::Time startTime = ros::Time::now();
-    {
-        // for testing round trip time
-        jointcommands.header.stamp = _js->header.stamp;
+void SetJointStatesReset(const sensor_msgs::JointState::ConstPtr &_js){
 
-        // assign sinusoidal joint angle targets
-        for (unsigned int i = 0; i < jointcommands.name.size(); i++){
-            if(i == 7 || i == 13) {
+    // for testing round trip time
+    jointcommands.header.stamp = _js->header.stamp;
 
-                // jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
-                jointcommands.position[i] = 2.00;
-                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
-            }else if(3 >= i || i >= 16){
-                jointcommands.position[i] = 0;
-                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
-            }else{
-                jointcommands.position[i] = 0;
-                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
-            }
-        }
+    // assign sinusoidal joint angle targets
+    for (unsigned int i = 0; i < jointcommands.name.size(); i++){
 
-        pub_joint_commands_.publish(jointcommands);
+        jointcommands.position[i] = 0;
+        std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
     }
+
+    pub_joint_commands_reset.publish(jointcommands);
+
 }
 
 int main(int argc, char** argv){
@@ -107,17 +98,19 @@ int main(int argc, char** argv){
         jointcommands.effort[i]      = 0;
         jointcommands.kp_velocity[i] = 0;
     }
+    // ros topic subscription
+    // reset joints
 
-    // ros topic subscriptions
-    ros::SubscribeOptions jointStatesSo = ros::SubscribeOptions::create<sensor_msgs::JointState>(
-                "/atlas/joint_states", 1, SetJointStates, ros::VoidPtr(), rosnode->getCallbackQueue());
+    ros::SubscribeOptions jointStatesSoReset = ros::SubscribeOptions::create<sensor_msgs::JointState>(
+                "/atlas/joint_states", 1, SetJointStatesReset, ros::VoidPtr(), rosnode->getCallbackQueue());
 
-    jointStatesSo.transport_hints = ros::TransportHints().unreliable();
+    jointStatesSoReset.transport_hints = ros::TransportHints().unreliable();
 
-    ros::Subscriber subJointStates = rosnode->subscribe(jointStatesSo);
+    ros::Subscriber subJointStatesReset = rosnode->subscribe(jointStatesSoReset);
 
-    pub_joint_commands_ = rosnode->advertise<osrf_msgs::JointCommands>("/atlas/joint_commands", 1 ,true);
+    pub_joint_commands_reset = rosnode->advertise<osrf_msgs::JointCommands>("/atlas/joint_commands", 1 ,true);
 
     ros::spin();
     return 0;
 }
+

@@ -55,19 +55,19 @@ def jointTrajectoryCommand():
 
 	for i in range(n):
 		p = JointTrajectoryPoint()
-		theta = rps * 1.0 * math.pi * i * dt 
-		x1 = 0.5 * math.sin(theta)
+		theta = rps * 2.0 * math.pi * i * dt 
+		x1 = 50 * abs(math.sin(2 * theta))
 		# x2 =  0.5 * math.sin(1 * theta)
 		# x1 = -0.001 * (500-i)
-		x2 = i * 0.001
-		x = 0
+		x2 = i * 0.01
+		x = 0.1
 		p.positions.append(x)
 		p.positions.append(x)
 		p.positions.append(x)
 		p.positions.append(x)
 		p.positions.append(x) # left leg hip abount z
 		p.positions.append(x) # left leg hip about y
-		p.positions.append(x1)
+		p.positions.append(x) # left leg hip about x 
 		p.positions.append(x)
 		p.positions.append(x)
 		p.positions.append(x)
@@ -89,6 +89,35 @@ def jointTrajectoryCommand():
 		p.positions.append(x)
 		p.positions.append(x)
 		p.positions.append(x)
+
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x) # left leg hip abount z
+		p.effort.append(x) # left leg hip about y
+		p.effort.append(x1) # left leg hip about x // important
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
+		p.effort.append(x)
 
 		jt.points.append(p) 
 

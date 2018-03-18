@@ -14,10 +14,15 @@ void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
     {
         // for testing round trip time
         jointcommands.header.stamp = _js->header.stamp;
-
-        // assign sinusoidal joint angle targets
         for (unsigned int i = 0; i < jointcommands.name.size(); i++){
-            jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
+            if(i == 4 || i == 9) {
+                // jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
+                jointcommands.position[i] = 2.00;
+                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
+            }else{
+                jointcommands.position[i] = 0;
+                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
+            }
         }
 
         pub_joint_commands_.publish(jointcommands);
@@ -40,36 +45,36 @@ int main(int argc, char** argv){
 
 
     // must match with AtlasPlugin
-    jointcommands.name.push_back("atlas::l_leg_hpz");
-    jointcommands.name.push_back("atlas::l_leg_hpx");
-    jointcommands.name.push_back("atlas::l_leg_hpy");
-    jointcommands.name.push_back("atlas::l_leg_kny");
-    jointcommands.name.push_back("atlas::l_leg_aky");
-    jointcommands.name.push_back("atlas::l_leg_akx");
-    jointcommands.name.push_back("atlas::r_leg_hpz");
-    jointcommands.name.push_back("atlas::r_leg_hpx");
-    jointcommands.name.push_back("atlas::r_leg_hpy");
-    jointcommands.name.push_back("atlas::r_leg_kny");
-    jointcommands.name.push_back("atlas::r_leg_aky");
-    jointcommands.name.push_back("atlas::r_leg_akx");
-    jointcommands.name.push_back("atlas::l_arm_shz");
-    jointcommands.name.push_back("atlas::l_arm_shx");
-    jointcommands.name.push_back("atlas::l_arm_ely");
-    jointcommands.name.push_back("atlas::l_arm_elx");
-    jointcommands.name.push_back("atlas::l_arm_wry");
-    jointcommands.name.push_back("atlas::l_arm_wrx");
-    jointcommands.name.push_back("atlas::l_arm_wry2");
-    jointcommands.name.push_back("atlas::r_arm_shz");
-    jointcommands.name.push_back("atlas::r_arm_shx");
-    jointcommands.name.push_back("atlas::r_arm_ely");
-    jointcommands.name.push_back("atlas::r_arm_elx");
-    jointcommands.name.push_back("atlas::r_arm_wry");
-    jointcommands.name.push_back("atlas::r_arm_wrx");
-    jointcommands.name.push_back("atlas::r_arm_wry2");
-    jointcommands.name.push_back("atlas::neck_ry");
-    jointcommands.name.push_back("atlas::back_bkz");
-    jointcommands.name.push_back("atlas::back_bky");
-    jointcommands.name.push_back("atlas::back_bkx");
+    jointcommands.name.push_back("atlas::l_leg_hpz");//0
+    jointcommands.name.push_back("atlas::l_leg_hpx");//1
+    jointcommands.name.push_back("atlas::l_leg_hpy");//2
+    jointcommands.name.push_back("atlas::l_leg_kny");//3
+    jointcommands.name.push_back("atlas::l_leg_aky");//4
+    jointcommands.name.push_back("atlas::l_leg_akx");//5
+    jointcommands.name.push_back("atlas::r_leg_hpz");//6
+    jointcommands.name.push_back("atlas::r_leg_hpx");//7
+    jointcommands.name.push_back("atlas::r_leg_hpy");//8
+    jointcommands.name.push_back("atlas::r_leg_kny");//9
+    jointcommands.name.push_back("atlas::r_leg_aky");//10
+    jointcommands.name.push_back("atlas::r_leg_akx");//11
+    jointcommands.name.push_back("atlas::l_arm_shz");//12
+    jointcommands.name.push_back("atlas::l_arm_shx");//13
+    jointcommands.name.push_back("atlas::l_arm_ely");//14
+    jointcommands.name.push_back("atlas::l_arm_elx");//15
+    jointcommands.name.push_back("atlas::l_arm_wry");//16
+    jointcommands.name.push_back("atlas::l_arm_wrx");//17
+    jointcommands.name.push_back("atlas::l_arm_wry2");//18
+    jointcommands.name.push_back("atlas::r_arm_shz");//19
+    jointcommands.name.push_back("atlas::r_arm_shx");//20
+    jointcommands.name.push_back("atlas::r_arm_ely");//21
+    jointcommands.name.push_back("atlas::r_arm_elx");//22
+    jointcommands.name.push_back("atlas::r_arm_wry");//23
+    jointcommands.name.push_back("atlas::r_arm_wrx");//24
+    jointcommands.name.push_back("atlas::r_arm_wry2");//25
+    jointcommands.name.push_back("atlas::neck_ry");//26
+    jointcommands.name.push_back("atlas::back_bkz");//27
+    jointcommands.name.push_back("atlas::back_bky");//28
+    jointcommands.name.push_back("atlas::back_bkx");//29
 
     unsigned int n = jointcommands.name.size();
     jointcommands.position.resize(n);
