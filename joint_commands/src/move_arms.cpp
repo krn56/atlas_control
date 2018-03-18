@@ -11,30 +11,34 @@ ros::Publisher pub_joint_commands_;
 osrf_msgs::JointCommands jointcommands;
 
 void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
-    static ros::Time startTime = ros::Time::now();
-    {
-        // for testing round trip time
-        jointcommands.header.stamp = _js->header.stamp;
 
-        // assign sinusoidal joint angle targets
-        for (unsigned int i = 0; i < jointcommands.name.size(); i++){
-            if(i == 7 || i == 13) {
+    // for testing round trip time
+    jointcommands.header.stamp = _js->header.stamp;
 
-                // jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
-                jointcommands.position[i] = 2.00;
-                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
-            }else if(3 >= i || i >= 16){
-                jointcommands.position[i] = 0;
-                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
-            }else{
-                jointcommands.position[i] = 0;
-                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
-            }
+    // assign sinusoidal joint angle targets
+    for (unsigned int i = 0; i < jointcommands.name.size(); i++){
+        if(i == 17) {
+
+            // jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
+            jointcommands.position[i] = 1.39;
+            std::cout << "moved arms joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
+        }else if(i == 23){
+            jointcommands.position[i] = -1.39;
+            std::cout << "moved arms joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
         }
-
-        pub_joint_commands_.publish(jointcommands);
+        else if (i == 7 || i == 13){
+            jointcommands.position[i] = 2.0;
+            jointcommands.effort[i] = 100;
+            std::cout << "moved leg joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
+        }else{
+            jointcommands.position[i] = 0;
+            std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
+        }
     }
+
+    pub_joint_commands_.publish(jointcommands);
 }
+
 
 int main(int argc, char** argv){
     ros::init(argc, argv, "publish_joint_commands");
@@ -102,10 +106,15 @@ int main(int argc, char** argv){
         rosnode->getParam("atlas_controller/gains/" + pieces[2] + "/i_clamp", jointcommands.i_effort_min[i]);
         jointcommands.i_effort_min[i] = -jointcommands.i_effort_min[i];
         rosnode->getParam("atlas_controller/gains/" + pieces[2] + "/i_clamp", jointcommands.i_effort_max[i]);
-
-        jointcommands.velocity[i]    = 0;
-        jointcommands.effort[i]      = 0;
-        jointcommands.kp_velocity[i] = 0;
+        if(i == 7 || i == 13){
+            jointcommands.velocity[i]    = 15;
+            jointcommands.effort[i]      = 100;
+            jointcommands.kp_velocity[i] = 15;
+        }else{
+            jointcommands.velocity[i]    = 0;
+            jointcommands.effort[i]      = 0;
+            jointcommands.kp_velocity[i] = 0;
+        }
     }
 
     // ros topic subscriptions

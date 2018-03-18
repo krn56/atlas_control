@@ -11,7 +11,6 @@ ros::Publisher pub_joint_commands_;
 osrf_msgs::JointCommands jointcommands;
 
 void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
-    static ros::Time startTime = ros::Time::now();
     {
         // for testing round trip time
         jointcommands.header.stamp = _js->header.stamp;
@@ -21,10 +20,7 @@ void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
             if(i == 7 || i == 13) {
 
                 // jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
-                jointcommands.position[i] = 2.00;
-                std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
-            }else if(3 >= i || i >= 16){
-                jointcommands.position[i] = 0;
+                jointcommands.position[i] = 1.5;
                 std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
             }else{
                 jointcommands.position[i] = 0;
