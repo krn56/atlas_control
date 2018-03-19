@@ -10,14 +10,15 @@ ros::Publisher pub_joint_commands_;
 osrf_msgs::JointCommands jointcommands;
 
 void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
-    static ros::Time startTime = ros::Time::now();
+//    static ros::Time startTime = ros::Time::now();
+    static float k;
     {
         // for testing round trip time
         jointcommands.header.stamp = _js->header.stamp;
         for (unsigned int i = 0; i < jointcommands.name.size(); i++){
-            if(i == 4 || i == 9) {
-                // jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
-                jointcommands.position[i] = 2.00;
+            if(i == 3 || i == 9) {
+                jointcommands.position[i] = std::fabs(2.0 * sin(k));
+//                jointcommands.position[i] = 2.0;
                 std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
             }else{
                 jointcommands.position[i] = 0;
@@ -27,6 +28,7 @@ void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
 
         pub_joint_commands_.publish(jointcommands);
     }
+    k += 0.001;
 }
 
 int main(int argc, char** argv){

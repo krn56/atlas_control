@@ -20,7 +20,8 @@ void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js){
             if(i == 7 || i == 13) {
 
                 // jointcommands.position[i] = 3.2 * sin((ros::Time::now() - startTime).toSec());
-                jointcommands.position[i] = 1.5;
+                jointcommands.position[i] = 2.0;
+                jointcommands.effort[i] = 200;
                 std::cout << "moved joint name - " << jointcommands.name[i] << " to :" << jointcommands.position[i] << std::endl;
             }else{
                 jointcommands.position[i] = 0;
@@ -100,7 +101,7 @@ int main(int argc, char** argv){
         rosnode->getParam("atlas_controller/gains/" + pieces[2] + "/i_clamp", jointcommands.i_effort_max[i]);
 
         jointcommands.velocity[i]    = 0;
-        jointcommands.effort[i]      = 0;
+//        jointcommands.effort[i]      = 0;
         jointcommands.kp_velocity[i] = 0;
     }
 

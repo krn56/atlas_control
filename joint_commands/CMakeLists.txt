@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   osrf_msgs
   roscpp
   trajectory_msgs
+  sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -138,6 +139,7 @@ add_executable(publish_joint_commands_v4_v5 src/publish_joint_commands_v4_v5.cpp
 add_executable(publish_joint_commands_reset src/publish_joint_commands_reset.cpp)
 add_executable(publish_joint_commands_v4_v5_reset src/publish_joint_commands_v4_v5_reset.cpp)
 add_executable(move_arms src/move_arms.cpp)
+add_executable(joint_command_animation src/joint_command_animation.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -163,6 +165,9 @@ target_link_libraries(publish_joint_commands_v4_v5_reset
    ${catkin_LIBRARIES}
  )
 target_link_libraries(move_arms
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(joint_command_animation
    ${catkin_LIBRARIES}
  )
 #############

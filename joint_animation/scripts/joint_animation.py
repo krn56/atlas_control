@@ -11,7 +11,7 @@ def jointTrajectoryCommand():
 
 	print rospy.get_rostime().to_sec()
 	while rospy.get_rostime().to_sec() == 0.0:
-		time.sleep(0.1)
+		time.sleep(1)
 		print rospy.get_rostime().to_sec()
 
 	pub = rospy.Publisher('/joint_trajectory', JointTrajectory, queue_size=10)
@@ -49,7 +49,7 @@ def jointTrajectoryCommand():
 	jt.joint_names.append("atlas::r_arm_usy")
 	jt.joint_names.append("atlas::r_arm_uwy")
 
-	n = 1500
+	n = 1080
 	dt = 0.01
 	rps = 0.05
 
@@ -67,7 +67,7 @@ def jointTrajectoryCommand():
 		p.positions.append(x)
 		p.positions.append(x) # left leg hip abount z
 		p.positions.append(x) # left leg hip about y
-		p.positions.append(x1)
+		p.positions.append(x2)
 		p.positions.append(x)
 		p.positions.append(x)
 		p.positions.append(x)
