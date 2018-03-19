@@ -139,6 +139,10 @@ add_executable(publish_joint_commands_v4_v5 src/publish_joint_commands_v4_v5.cpp
 add_executable(publish_joint_commands_reset src/publish_joint_commands_reset.cpp)
 add_executable(publish_joint_commands_v4_v5_reset src/publish_joint_commands_v4_v5_reset.cpp)
 add_executable(move_arms src/move_arms.cpp)
+add_executable(move_arms_step3 src/move_arms_step3.cpp)
+add_executable(move_arms_step4 src/move_arms_step4.cpp)
+add_executable(move_arms_step5 src/move_arms_step5.cpp)
+add_executable(move_arms_smooth src/move_arms_smooth.cpp)
 add_executable(joint_command_animation src/joint_command_animation.cpp)
 
 ## Rename C++ executable without prefix
@@ -165,6 +169,18 @@ target_link_libraries(publish_joint_commands_v4_v5_reset
    ${catkin_LIBRARIES}
  )
 target_link_libraries(move_arms
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(move_arms_step3
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(move_arms_step4
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(move_arms_step5
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(move_arms_smooth
    ${catkin_LIBRARIES}
  )
 target_link_libraries(joint_command_animation

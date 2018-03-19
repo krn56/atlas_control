@@ -8,7 +8,7 @@
   <arg name="inertia_args" default="" /> <!-- _with_v1_inertia -->
 
   <param name="/atlas/time_to_unpin" type="double" value="1.0"/>
-  <param name="/atlas/startup_mode" type="string" value="bdi_stand"/>
+  <param name="/atlas/startup_mode" type="string" value="User"/>
 
   <!-- start gazebo with the Atlas -->
   <include file="$(find drcsim_gazebo)/launch/atlas_no_controllers.launch">
