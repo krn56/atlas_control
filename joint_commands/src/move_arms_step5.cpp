@@ -4,13 +4,18 @@
 # include <trajectory_msgs/JointTrajectoryPoint.h>
 
 int main(int argc, char** argv){
-    ros::init(argc, argv, "move_arms_step3_node");
+    ros::init(argc, argv, "move_arms_step5_node");
 
-//    ROS_INFO(ros::Time::toSec());
-//    while(ros::Time::toSec() == 0.0){
-//        sleep(0.1);
-//        ROS_INFO(ros::Time::toSec());
-//    }
+    // wait for simulation time update
+    ros::Time last_ros_time;
+    bool wait = true;
+    while(wait){
+//        ROS_INFO("waiting");
+        last_ros_time = ros::Time::now();
+        if (last_ros_time.toSec() > 0){
+            wait = false;
+        }
+    }
 
     ros::NodeHandle nh;
     ros::Publisher traj_pub = nh.advertise <trajectory_msgs::JointTrajectory> ("/joint_trajectory", 10);
@@ -92,7 +97,7 @@ int main(int argc, char** argv){
         traj_pub.publish(jt);
         ros::spinOnce();
         i -= 0.0001;
-        if (i == 0){
+        if (i == 0.4){
             exit(1);
         }
     }

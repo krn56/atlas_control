@@ -26,12 +26,12 @@ int main(int argc, char** argv){
     jt.joint_names.push_back("atlas::l_leg_uhz");//4
     jt.joint_names.push_back("atlas::l_leg_mhx");//5
     jt.joint_names.push_back("atlas::l_leg_lhy");//6
-    jt.joint_names.push_back("atlas::l_leg_kny");//7
+    jt.joint_names.push_back("atlas::l_leg_kny");//7*
     jt.joint_names.push_back("atlas::l_leg_uay");//8
     jt.joint_names.push_back("atlas::l_leg_lax");//9
     jt.joint_names.push_back("atlas::r_leg_lax");//10
     jt.joint_names.push_back("atlas::r_leg_uay");//11
-    jt.joint_names.push_back("atlas::r_leg_kny");//12
+    jt.joint_names.push_back("atlas::r_leg_kny");//12*
     jt.joint_names.push_back("atlas::r_leg_lhy");//13
     jt.joint_names.push_back("atlas::r_leg_mhx");//14
     jt.joint_names.push_back("atlas::r_leg_uhz");//15
@@ -64,12 +64,12 @@ int main(int argc, char** argv){
         p.positions.push_back(x);//4
         p.positions.push_back(x);//5
         p.positions.push_back(x);//6
-        p.positions.push_back(x2);//7
+        p.positions.push_back(x2);//7*
         p.positions.push_back(x);//8
         p.positions.push_back(x);//9
         p.positions.push_back(x);//10
         p.positions.push_back(x);//11
-        p.positions.push_back(x2);//12
+        p.positions.push_back(x2);//12*
         p.positions.push_back(x);//13
         p.positions.push_back(x);//14
         p.positions.push_back(x);//15

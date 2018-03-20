@@ -144,6 +144,9 @@ add_executable(move_arms_step4 src/move_arms_step4.cpp)
 add_executable(move_arms_step5 src/move_arms_step5.cpp)
 add_executable(move_arms_smooth src/move_arms_smooth.cpp)
 add_executable(joint_command_animation src/joint_command_animation.cpp)
+add_executable(joint_commands_random src/joint_commands_random.cpp)
+add_executable(move_arms_beta src/move_arms_beta.cpp)
+add_executable(move_arms_step5_new src/move_arms_step5_new.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -184,6 +187,15 @@ target_link_libraries(move_arms_smooth
    ${catkin_LIBRARIES}
  )
 target_link_libraries(joint_command_animation
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(joint_commands_random
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(move_arms_beta
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(move_arms_step5_new
    ${catkin_LIBRARIES}
  )
 #############
