@@ -46,7 +46,7 @@ void SetJointStates(const sensor_msgs::JointState::ConstPtr &_js)
           jointcommands.position[i] = 0.0;
           x3 += 0.001;
       }else if (i == 13){
-          jointcommands.position[i] = 2.0;
+          jointcommands.position[i] = 0.0;
           x4 += 0.001;
       }else if (i == 19){
           jointcommands.position[i] = 2.2;
