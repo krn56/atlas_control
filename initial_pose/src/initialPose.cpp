@@ -53,9 +53,11 @@ void setJointStatesCb(const sensor_msgs::JointState::ConstPtr & js){
 
             if( i == 7){
                 jointCommands.position[i] = 1.9;
+                jointCommands.effort[i] = 255;
 //                x3 += 0.0001;
             }else if (i == 13){
                 jointCommands.position[i] = 1.9;
+                jointCommands.effort[i] = 255;
 //                x4 += 0.0001;
             }else if (i == 19){
                 jointCommands.position[i] = 2.2;
@@ -67,20 +69,30 @@ void setJointStatesCb(const sensor_msgs::JointState::ConstPtr & js){
                 jointCommands.position[i] = -1.3;
             }else if (i == 17){
                 jointCommands.position[i] = x1;
-                x1 -= 0.0001;
+                x1 -= 0.001;
             }else if (i == 23){
                 jointCommands.position[i] = x2;
-                x2 += 0.0001;
+                x2 += 0.001;
             }else if (i == 5){
-                jointCommands.position[i] = -0.5;
-                jointCommands.effort[i] = 100;
+                jointCommands.position[i] = -0.8;
+                jointCommands.effort[i] = 150 + (1.39 - x1) * 800;
+//                jointCommands.kd_position[i] = jointCommands.effort[i] * 0.1;
             }else if (i == 11){
-                jointCommands.position[i] = 0.5;
-                jointCommands.effort[i] = -100;
-            }/*else if (i == 0 || i == 1 || i == 2){
+                jointCommands.position[i] = 0.8;
+                jointCommands.effort[i] = -150 - (1.39 + x2) * 800;
+//                jointCommands.kd_position[i] = jointCommands.effort[i] * 0.1;
+            }else if (i == 4){
+                jointCommands.position[i] = -1.2;
+                jointCommands.effort[i] = -100 - (1.39 - x1) * 800;
+//                jointCommands.kd_position[i] = jointCommands.effort[i] * 0.1;
+            }else if(i == 10){
+                jointCommands.position[i] = 1.2;
+                jointCommands.effort[i] = 100 + (1.39 + x2) * 800;
+//                jointCommands.kd_position[i] = jointCommands.effort[i] * 0.1;
+            }else if (i == 1){
                 jointCommands.position[i] = 0.0;
-                jointCommands.effort[i] = 100;
-            }*/
+                jointCommands.effort[i] = 255;
+            }
             else{
                 jointCommands.position[i] = 0.0;
             }
@@ -89,6 +101,7 @@ void setJointStatesCb(const sensor_msgs::JointState::ConstPtr & js){
 
     pubJointCommands.publish(jointCommands);
 }
+
 
 
 int main(int argc, char** argv){
