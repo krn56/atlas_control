@@ -1,0 +1,12 @@
+#!/bin/bash
+
+roslaunch drcsim_gazebo atlas.launch
+gnome-terminal -x sh -c "rostopic pub /atlas/control_mode std_msgs/String -- "User"; bash" 
+gnome-terminal -x sh -c "rosrun initial_pose pose_0; bash"
+
+rosrun initial_pose pose_1
+rosrun initial_pose pose_2
+rosrun initial_pose pose_3
+rosrun initial_pose pose_4
+rosrun initial_pose pose_5
+rosrun initial_pose pose_6

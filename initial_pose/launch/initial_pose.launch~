@@ -1,0 +1,10 @@
+<launch>
+<include file="$(find drcsim_gazebo)/launch/atlas.launch"> </include>
+<node pkg="initial_pose" type="pose_0" name="pose_0"> </node>
+<node pkg="initial_pose" type="pose_1" name="pose_1"> </node>
+<node pkg="initial_pose" type="pose_2" name="pose_2"> </node>
+<node pkg="initial_pose" type="pose_3" name="pose_3"> </node>
+<node pkg="initial_pose" type="pose_4" name="pose_4"> </node>
+<node pkg="initial_pose" type="pose_5" name="pose_5"> </node>
+<node pkg="initial_pose" type="pose_6" name="pose_6"> </node>
+</launch>
