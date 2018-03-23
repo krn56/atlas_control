@@ -135,6 +135,13 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(initialPose src/initialPose.cpp)
+add_executable(pose_0 src/pose_0.cpp)
+add_executable(pose_1 src/pose_1.cpp)
+add_executable(pose_2 src/pose_2.cpp)
+add_executable(pose_3 src/pose_3.cpp)
+add_executable(pose_4 src/pose_4.cpp)
+add_executable(pose_5 src/pose_5.cpp)
+add_executable(pose_6 src/pose_6.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,7 +157,27 @@ add_executable(initialPose src/initialPose.cpp)
 target_link_libraries(initialPose
    ${catkin_LIBRARIES}
  )
-
+target_link_libraries(pose_0
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(pose_1
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(pose_2
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(pose_3
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(pose_4
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(pose_5
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(pose_6
+   ${catkin_LIBRARIES}
+ )
 #############
 ## Install ##
 #############
