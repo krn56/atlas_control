@@ -1,4 +1,0 @@
-repo: 603876499c51678c18df81b1cde8481509c28552
-node: 3696090ad6f1899dcf2361c5961a6daaad2591fe
-branch: default
-tag: drcsim7_7.0.0
