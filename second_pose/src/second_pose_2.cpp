@@ -18,7 +18,7 @@ void setJointStatesCb(const sensor_msgs::JointState::ConstPtr & js){
         // pose_1 leg upwards values
         // moving left leg down first
         if( i == 7){
-            jointCommands.position[i] = 0.0;
+            jointCommands.position[i] = 1.9;
         }else if (i == 13){
             jointCommands.position[i] = 1.9;
         }
@@ -50,11 +50,11 @@ void setJointStatesCb(const sensor_msgs::JointState::ConstPtr & js){
         // moving left hand second step after moving left leg downwards
         // moving right hand as well to increase the support polygon
         else if (i == 17){
-            jointCommands.position[i] = -1.0;
-            jointCommands.effort[i] = 200;
+            jointCommands.position[i] = -0.4;
+//            jointCommands.effort[i] = 200;
         }else if (i == 23){
-            jointCommands.position[i] = 0.6;
-            jointCommands.effort[i] = 200;
+            jointCommands.position[i] = 0.4;
+//            jointCommands.effort[i] = 200;
         }
 
         // pose_6 values for arm movement
@@ -68,8 +68,17 @@ void setJointStatesCb(const sensor_msgs::JointState::ConstPtr & js){
         // third step moving right leg forward
         // moving right leg gradually
         else if (i == 12){
-            jointCommands.position[i] = x1;
-            x1 -= 0.001;
+            jointCommands.position[i] = -1.2;
+//            x1 -= 0.001;
+        }else if (i == 6){
+            jointCommands.position[i] = -1.2;
+//            jointCommands.effort[i] = -x2 * 500;
+//            x2 -= 0.001;
+        }
+
+        // moving back last step
+        else if (i == 1){
+            jointCommands.position[i] = 1.6;
         }
 
         // values to keep legs balanced
@@ -186,6 +195,7 @@ int main(int argc, char** argv){
 
     return 0;
 }
+
 
 
 

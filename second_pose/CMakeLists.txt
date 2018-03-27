@@ -136,6 +136,8 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/second_pose_node.cpp)
 add_executable(second_pose_0 src/second_pose_0.cpp)
+add_executable(second_pose_1 src/second_pose_1.cpp)
+add_executable(second_pose_2 src/second_pose_2.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,7 +153,12 @@ add_executable(second_pose_0 src/second_pose_0.cpp)
  target_link_libraries(second_pose_0
    ${catkin_LIBRARIES}
  )
-
+ target_link_libraries(second_pose_1
+   ${catkin_LIBRARIES}
+ )
+ target_link_libraries(second_pose_2
+   ${catkin_LIBRARIES}
+ )
 #############
 ## Install ##
 #############
